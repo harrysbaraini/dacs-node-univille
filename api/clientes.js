@@ -3,9 +3,9 @@ var db = require('./utils/db');
 module.exports = function(router) {
 
   /**
-  * GET /usuarios
+  * GET /clientes
   */
-  router.get('/usuarios', function (req, res) {
+  router.get('/clientes', function (req, res) {
   	var querystr = 'select * from cliente';
 
   	db.query(querystr, function (err, rows, fields) {
@@ -20,9 +20,9 @@ module.exports = function(router) {
   });
 
   /**
-  * GET /usuarios/:id
+  * GET /clientes/:id
   */
-  router.get('/usuarios/:id', function (req, res) {
+  router.get('/clientes/:id', function (req, res) {
   	var querystr = 'select * from cliente where oid = ' + req.params.id;
 
   	db.query(querystr, function (err, rows, fields) {
@@ -46,8 +46,8 @@ module.exports = function(router) {
   	});
   });
 
-  router.post('/usuarios',function (req, res) {
-  	var values = [ "'" + req.body.nome + "'", "'" + req.body.endereco + "'", "'" + req.body.email + "'" ];
+  router.post('/clientes',function (req, res) {
+  	var values = [ "'" + req.body.NOME + "'", "'" + req.body.ENDERECO + "'", "'" + req.body.EMAIL + "'" ];
   	var querystr = "insert into cliente (NOME, ENDERECO, EMAIL) values(" + values.join(', ') + ")";
 
   	db.query(querystr, function (err, rows, fields) {
@@ -60,7 +60,7 @@ module.exports = function(router) {
   	});
   });
 
-  router.put('/usuarios/:id',function (req, res) {
+  router.put('/clientes/:id',function (req, res) {
   	var values = [];
   	for (var p in req.body) {
   		values.push(p + " = '" + req.body[p] + "'");
@@ -75,6 +75,17 @@ module.exports = function(router) {
   		res.json({
   			data: rows
   		});
+  	});
+  });
+
+  router.delete('/clientes/:id',function (req, res) {
+  	var querystr = "DELETE FROM cliente WHERE OID = " + req.params.id;
+
+  	db.query(querystr, function (err, rows, fields) {
+  		if (err) throw err;
+
+  		res.status(204);
+  		res.json({});
   	});
   });
 

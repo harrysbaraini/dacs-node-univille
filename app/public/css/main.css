@@ -1,0 +1,17 @@
+/** SUPER DACS !!! */
+
+[v-cloak] {
+  opacity: 0;
+
+  -webkit-transition: opacity 500ms ease;
+  -moz-transition: opacity 500ms ease;
+  -o-transition: opacity 500ms ease;
+  transition: opacity 500ms ease;
+}
+
+.title {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  margin-bottom: 40px;
+}

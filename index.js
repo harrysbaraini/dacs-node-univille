@@ -10,15 +10,17 @@ var handlebars = require('express-handlebars').create({ 'defaultLayout' : 'main'
 app.engine('handlebars', handlebars.engine);
 
 var port = process.env.PORT || 4000;
-var router = express.Router();
+var apiRouter = express.Router();
+var appRouter = express.Router();
 
 // FRONT-END APP
-require('./app/routes')(router);
+app.use(express.static(__dirname + '/app/public'));
+app.use('/', appRouter);
+require('./app/routes')(appRouter);
 
 // API
-app.use('/api', router);
-
-require('./api/usuarios')(router);
+app.use('/api', apiRouter);
+require('./api/clientes')(apiRouter);
 
 // LISTEN !!
 app.listen(port,function(){

@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SUPER DACS !</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div id="app">
+          <div class="container" v-cloak>
+            <div class="row">
+              <div class="col-sm-12">
+                <h1 class="title">Super Dacs!!!</h1>
+              </div>
+            </div>
+            <!-- LISTA -->
+            <div class="row" v-if="pg === 'clientes.lista'">
+              <div class="col-sm-12">
+                <h2>
+                  Clientes
+                  <div class="btn-group pull-xs-right">
+                    <button class="btn btn-success" @click="adicionar()">ADICIONAR</button>
+                  </div>
+                </h2>
+              </div>
+              <div class="col-sm-12">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th width="50">ID</th>
+                        <th>NOME</th>
+                        <th>ENDEREÇO</th>
+                        <th>E-MAIL</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(cliente, index) in clientes">
+                        <td>{{ cliente.OID }}</td>
+                        <td>{{ cliente.NOME }}</td>
+                        <td>{{ cliente.ENDERECO }}</td>
+                        <td>{{ cliente.EMAIL }}</td>
+                        <td>
+                          <div class="btn-group pull-xs-right">
+                            <button class="btn btn-primary" @click="editar(cliente, index)">
+                              EDITAR
+                            </button>
+                            <button class="btn btn-default" @click="remover(cliente, index)">
+                              REMOVER
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- EDITAR -->
+            <div class="row" v-if="pg === 'clientes.editar' && edit">
+              <form @submit.prevent="salvar()">
+                <div class="col-sm-12 form-group">
+                  <label>NOME</label>
+                  <input type="text" class="form-control" v-model="edit.NOME">
+                </div>
+                <div class="col-sm-12 form-group">
+                  <label>ENDEREÇO</label>
+                  <input type="text" class="form-control" v-model="edit.ENDERECO">
+                </div>
+                <div class="col-sm-12 form-group">
+                  <label>E-MAIL</label>
+                  <input type="text" class="form-control" v-model="edit.EMAIL">
+                </div>
+                <div class="col-sm-12">
+                  <button class="btn btn-primary">SALVAR</button>
+                  <button class="btn btn-default" type="button" @click="cancelar()">CANCELAR</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>
+        <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/vue@2.0.1/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
